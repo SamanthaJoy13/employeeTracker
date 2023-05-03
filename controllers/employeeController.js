@@ -1,8 +1,25 @@
 const connection = require('../config/connection');
+const getAllEmployees = async (req, res) => {
+    const getAllEmployees = 'SELECT * FROM employee;';
+      try {
+          const [result] = await connection.query(getAllEmployees);
+          res.json(result);
+    } catch (error) {
+      res.status(500).json({error});
+    };
+  };
 
-/* const create roleId = async (req, res) => {
-    const {text} = req.body;
-    const {role_id} = req.query;
-    const query = 'INSERT INTO role (text, role_id) VALUES (?, ?)';
-    
-} */
+  const AddEmployee = async (req, res) => {
+    const AddEmployee = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) SET ?;';
+      try {
+          const [result] = await connection.query(AddEmployee, req.body);
+          res.json(result);
+    } catch (error) {
+      res.status(500).json({error});
+    };
+  };
+
+  module.exports = {
+    getAllEmployees,
+    AddEmployee
+  };

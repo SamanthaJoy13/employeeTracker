@@ -48,14 +48,43 @@ const menu = () => {
 };
 
 const viewAllDepartments = () => {
-    fetch('http://localhost:3001/api/department', {
+    fetch('/api/department', {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     }).then(function (response) {
         return response.json();
-    }).then(function(data) {
-        console.table(data);
+    }).then(function (data) {
+        dataDisplayer(data);
     });
+};
+
+const addDepartment = () => {
+  inquirer.prompt([
+    {
+      name: 'name',
+      message: 'What is the department name?',
+      type: 'input',
+    }
+  ]).then(answers => {
+    fetch('/api/department', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(answers),
+    });
+  });
+};
+
+const viewAllRoles = () => {
+  fetch('/api/role', {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json'},
+  }).then(function(response) {
+    return response.json();
+  }).then(function (data) {
+    dataDisplayer(data);
+  });
 };
 
 menu();

@@ -54,7 +54,7 @@ const viewAllDepartments = () => {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        dataDisplayer(data);
+        consoleTable(data);
     });
 };
 
@@ -83,7 +83,7 @@ const viewAllRoles = () => {
   }).then(function(response) {
     return response.json();
   }).then(function (data) {
-    dataDisplayer(data);
+    consoleTable(data);
   });
 };
 
@@ -136,11 +136,11 @@ const viewAllEmployees = () => {
   }).then(function (response) {
     return response.json();
   }).then(function (data) {
-    dataDisplayer(data);
+    consoleTable(data);
   });
 };
 
-const  addEmployee = () => {
+const addEmployee = () => {
   fetch('/api/role', {
     method: 'GET',
     headers: {
@@ -185,9 +185,9 @@ const  addEmployee = () => {
   });
 };
 
-const dataDisplayer = (data) => {
+ const dataDisplayer = (data) => {
   console.table(data);
-  questions();
-};
+   questions();
+   }; 
 
 menu();
